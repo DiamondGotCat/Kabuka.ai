@@ -6,9 +6,9 @@ from prophet import Prophet
 import pandas as pd
 
 # 1. Set information and Get Data
-start = datetime.datetime(2009, 1, 1)
-end = datetime.datetime(2024, 7, 29)
-df = yf.download("AAPL", start=start, end=end)
+start = datetime.datetime(int(input("Start Year: ")), 1, 1)
+end = datetime.datetime(int(input("End Year: ")), 12, 30)
+df = yf.download(input("ID of Stock: "), start=start, end=end)
 
 # Prepare data for Prophet
 df.reset_index(inplace=True)
@@ -20,7 +20,7 @@ model = Prophet()
 model.fit(df)
 
 # 3. Make future dataframe and predict
-future = model.make_future_dataframe(periods=1460)  # Forecasting for 365 days into the future
+future = model.make_future_dataframe(periods=744)  # Forecasting for 62 days into the future
 forecast = model.predict(future)
 
 # 4. Visualize the forecast
